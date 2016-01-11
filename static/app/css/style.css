@@ -1,0 +1,23 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700);
+
+body {background-color: #fff;font-family: 'Roboto', sans-serif;}
+
+/* override Bootstrap link color */
+
+
+/* create a dynamic add recipe link on the front page */
+.add-recipe a {color: #333;}
+.add-recipe a:hover {text-decoration: none;}
+.add-recipe a:hover span {display:none}
+.add-recipe a:hover:before {content:"Add Yours"}
+
+/* align and color the add and delete row links */
+.dynamic-form {clear: both;}
+.delete-row:visited {color:#933 !important;}
+.delete-row:active {color:#933 !important;}
+.delete-row {float:right;color:#933 !important;}
+
+.add-row:visited {color:#390 !important;}
+.add-row:active {color:#390 !important;}
+.add-row {display:inline; color:#390 !important;}
+.add-row:before {content:"\a";white-space:pre;}

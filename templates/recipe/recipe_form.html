@@ -1,0 +1,84 @@
+{% extends "base.html" %}{% load crispy_forms_tags %}
+
+{% block title %}Add Yours{% endblock title %}
+
+{% block content %}
+    <div class="page-header">
+        <h1><a href="{% url 'recipe-list' %}"><i class="fa fa-arrow-circle-left"></i></a> Add Yours</h1>
+    </div>
+    
+    <div class="row">
+        <div class="col-sm-8">
+            <form enctype="multipart/form-data" action="." method="post">
+                {% csrf_token %}
+                
+                <fieldset>
+                    {{ form|crispy }}
+                </fieldset>
+                
+                <fieldset>
+                    <legend>Recipe Ingredient</legend>
+                    {{ ingredient_form.management_form }}
+                    {{ ingredient_form.non_form_errors }}
+                    {% for form in ingredient_form %}
+                        {{ form.id }}
+                        <div class="inline {{ ingredient_form.prefix }}">
+                            {{ form.name.errors }}
+                            {{ form.name.label_tag }}
+                            {{ form.name }}
+                        </div>
+                    {% endfor %}
+                </fieldset>
+                
+                <br/>
+                
+                <fieldset>
+                    <legend>Recipe instruction</legend>
+                    {{ instruction_form.management_form }}
+                    {{ instruction_form.non_form_errors }}
+                    {% for form in instruction_form %}
+                        {{ form.id }}
+                        <div class="inline {{ instruction_form.prefix }}">
+                            {{ form.number.errors }}
+                            {{ form.number.label_tag }}
+                            {{ form.number }}
+                            {{ form.description.errors }}
+                            {{ form.description.label_tag }}
+                            {{ form.description }}
+                        </div>
+                    {% endfor %}
+                </fieldset>
+                
+                <br/>
+                
+                <div class="text-right">
+                    <button class="btn btn-default" type="submit">Add Recipe</button>
+                </div>
+            
+            </form>
+        </div>
+        
+        <div class="col-sm-4 text-center" style="margin-top:20px;">
+            <img src="http://iab.wpengine.com/wp-content/uploads/2015/06/300x600.gif" width="300" height="600" />
+        </div>
+        
+    </div>
+{% endblock content %}
+
+{% block js %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.formset/1.2.2/jquery.formset.min.js"></script>
+        <script type="text/javascript">
+            $(function() {
+                $(".inline.{{ ingredient_form.prefix }}").formset({
+                    prefix: "{{ ingredient_form.prefix }}",
+                    addText: 'add ingredient',
+                    deleteText: 'remove'
+                })
+                $(".inline.{{ instruction_form.prefix }}").formset({
+                    prefix: "{{ instruction_form.prefix }}",
+                    addText: 'add instruction',
+                    deleteText: 'remove'
+                })
+            })
+        </script>
+{% endblock js %}

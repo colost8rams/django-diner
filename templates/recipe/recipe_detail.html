@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}{{ object }}{% endblock title %}
+
+{% block content %}
+    <div class="page-header">
+        <h1><a href="{% url 'recipe-list' %}"><i class="fa fa-arrow-circle-left"></i></a> {{ object }}</h1>
+    </div>
+    
+    <div class="row">
+        
+        <div class="col-sm-8">
+            {% if object.image %}
+            <img src="{{ MEDIA_URL }}{{ object.image }}" class="img-responsive img-rounded" /><br/>
+            {% endif %}
+            <p class="lead">{{ object.description }}</p>
+            
+            <h4>Ingredients</h4>
+            <ul class="list-group">
+                {% for ingredient in object.ingredient_set.all %}
+                <li class="list-group-item">{{ ingredient }}</li>
+                {% endfor %}
+            </ul>
+            
+            <h4>Instructions</h4>
+            <ul class="list-group">
+                {% for instruction in object.instruction_set.all %}
+                <li class="list-group-item">{{ instruction }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <div class="col-sm-4 text-center">
+            <img src="http://iab.wpengine.com/wp-content/uploads/2015/06/300x600.gif" width="300" height="600" />
+        </div>
+        
+    </div>
+{% endblock content %}
