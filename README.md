@@ -1,4 +1,4 @@
 Django Diner
 ============
 
-Simle Django application to handle a collection of recipes.
+Simple Django application to handle a collection of recipes.
