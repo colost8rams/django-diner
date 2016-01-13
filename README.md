@@ -80,4 +80,4 @@ Thanks
 ------
 
 If you have any questions please feel free to contact me at
-[terry\@iknowmac.com](<mailto:terry@iknowmac.com>).
+[terry@iknowmac.com](<mailto:terry@iknowmac.com>).
