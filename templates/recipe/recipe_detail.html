@@ -16,14 +16,14 @@
             <p class="lead">{{ object.description }}</p>
             
             <h4>Ingredients</h4>
-            <ul class="list-group">
+            <ul class="list-group recipe-list">
                 {% for ingredient in object.ingredient_set.all %}
                 <li class="list-group-item">{{ ingredient }}</li>
                 {% endfor %}
             </ul>
             
             <h4>Instructions</h4>
-            <ul class="list-group">
+            <ul class="list-group recipe-list">
                 {% for instruction in object.instruction_set.all %}
                 <li class="list-group-item">{{ instruction }}</li>
                 {% endfor %}
@@ -36,3 +36,17 @@
         
     </div>
 {% endblock content %}
+
+{% block js %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.recipe-list li').click(function(){
+                if($(this).hasClass( "highlight")){
+                    $(this).removeClass('highlight');
+                } else {
+                    $(this).addClass('highlight');
+                }
+            });
+        });
+    </script>
+{% endblock js %}

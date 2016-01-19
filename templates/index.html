@@ -1,6 +1,5 @@
 {% extends "base.html" %}{% load bootstrap_pagination %}
 
-
 {% block css %}
     <style>
         html, body { height: 100%; }
@@ -24,14 +23,13 @@
             -webkit-transform: translateX(-50%) translateY(-50%);
             transform: translateX(-50%) translateY(-50%);
             background: url(/static/cookies.jpg) no-repeat;
-            background-size: cover; 
+            background-size: cover;
+            opacity: 0.5;
         }
     </style>
 {% endblock css %}
 
-
 {% block title %}List{% endblock title %}
-
 
 {% block content %}
 <video autoplay poster="{{ STATIC_URL }}/app/images/cookies.jpg" id="bgvid">
@@ -49,9 +47,11 @@
             </a>
             {% endfor %}
         </div>
+        {% if paginator.num_pages >= 2 %}
         <div class="text-center">
             {% bootstrap_paginate page_obj range=5 show_prev_next="true" show_first_last="false" %}
         </div>
+        {% endif %}
     </div>
     <div class="col-md-3 col-xs-1"></div>
 </div>
