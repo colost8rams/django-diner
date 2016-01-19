@@ -5,6 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
 from django.template.defaultfilters import slugify
 
+from sorl.thumbnail import ImageField
 
 
 class Ingredient(models.Model):
@@ -41,7 +42,7 @@ class Recipe(models.Model):
     """
     title = models.CharField(_("name"), max_length=140)
     slug = models.SlugField(_("slug"), unique=True, blank=True, null=True)
-    image = models.ImageField(upload_to="recipe/%Y/%m/%d", blank=True, null=True)
+    image = ImageField(upload_to="recipe/%Y/%m/%d", blank=True, null=True)
     description = models.TextField(_("description"), blank=True, null=True)
     
     servings = models.PositiveSmallIntegerField(_("servings"), blank=True, null=True)

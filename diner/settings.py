@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 INSTALLED_APPS += [
     'crispy_forms',
     'bootstrap_pagination',
+    'sorl.thumbnail',
     'recipe',
 ]
 
@@ -131,3 +132,11 @@ MEDIA_ROOT = '/Users/iknowmac/django-diner/media'
 # Django Crispy Forms
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'recipe_cache_table',
+    }
+}
