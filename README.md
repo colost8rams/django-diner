@@ -18,11 +18,11 @@ Instructions can be found at
 <https://docs.djangoproject.com/en/1.9/ref/contrib/staticfiles/>
 
 
-`Diner` also requires two other Django apps to function properly,
-`django-bootstrap-pagination` and `django-crispy-forms`. Installation
+`Diner` also requires three other Django apps to function properly,
+`django-bootstrap-pagination`, `django-crispy-forms` and `sorl-thumbnail`. Installation
 instructions can be found here
-<https://github.com/jmcclell/django-bootstrap-pagination> and here
-<https://github.com/maraujop/django-crispy-forms> respectively.
+<https://github.com/jmcclell/django-bootstrap-pagination> here
+<https://github.com/maraujop/django-crispy-forms> and here <https://github.com/mariocesar/sorl-thumbnail> respectively.
 
 
 Installation
