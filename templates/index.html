@@ -4,8 +4,28 @@
 {% block css %}
     <style>
         html, body { height: 100%; }
-        html {display: table; margin: auto;}
-        body {display: table-cell;vertical-align: middle;}
+        .vertical-center {
+            min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+            min-height: 100vh; /* These two lines are counted as one :-)       */
+            display: flex;
+            align-items: center;
+        }
+        video#bgvid { 
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -100;
+            -ms-transform: translateX(-50%) translateY(-50%);
+            -moz-transform: translateX(-50%) translateY(-50%);
+            -webkit-transform: translateX(-50%) translateY(-50%);
+            transform: translateX(-50%) translateY(-50%);
+            background: url(/static/cookies.jpg) no-repeat;
+            background-size: cover; 
+        }
     </style>
 {% endblock css %}
 
@@ -14,22 +34,25 @@
 
 
 {% block content %}
-    <h1 class="add-recipe text-center"><a href="{% url 'recipe-add' %}"><span>Recipes</span></a></h1>
-    <div class="row">
-        <div class="col-md-3 col-xs-1"></div>
-        <div class="col-md-6 col-xs-10">
-            <div class="list-group">
-                {% for recipe in object_list %}
-                <a href="{{ recipe.get_absolute_url }}" class="list-group-item">
-                    <span class="badge">{{ recipe.ingredients.count }}</span>
-                    {{ recipe }}
-                </a>
-                {% endfor %}
-            </div>
-            <div class="text-center">
-                {% bootstrap_paginate page_obj range=5 show_prev_next="true" show_first_last="false" %}
-            </div>
+<video autoplay poster="{{ STATIC_URL }}/app/images/cookies.jpg" id="bgvid">
+    <source src="{{ STATIC_URL }}/app/videos/cookies.mp4" type="video/mp4">
+</video>
+<div class="vertical-center">
+    <div class="col-md-3 col-xs-1"></div>
+    <div class="col-md-6 col-xs-10">
+        <h1 class="add-recipe text-center"><a href="{% url 'recipe-add' %}"><span>Recipes</span></a></h1>
+        <div class="list-group">
+            {% for recipe in object_list %}
+            <a href="{{ recipe.get_absolute_url }}" class="list-group-item">
+                <span class="badge">{{ recipe.ingredients.count }}</span>
+                {{ recipe }}
+            </a>
+            {% endfor %}
         </div>
-        <div class="col-md-3 col-xs-1"></div>
+        <div class="text-center">
+            {% bootstrap_paginate page_obj range=5 show_prev_next="true" show_first_last="false" %}
+        </div>
     </div>
+    <div class="col-md-3 col-xs-1"></div>
+</div>
 {% endblock content %}
