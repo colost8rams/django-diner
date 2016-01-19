@@ -30,10 +30,11 @@
     </style>
 {% endblock css %}
 
-{% block title %}List{% endblock title %}
+{% block title %}Recipe List{% endblock title %}
 
 {% block content %}
 <video autoplay poster="{{ STATIC_URL }}/app/images/cookies.jpg" id="bgvid">
+    <source src="{{ STATIC_URL }}/app/videos/cookies.webm" type="video/webm">
     <source src="{{ STATIC_URL }}/app/videos/cookies.mp4" type="video/mp4">
 </video>
 <div class="vertical-center">
