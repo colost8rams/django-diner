@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 
-from recipe.views import RecipeListView, RecipeDetailView, RecipeCreateView
+from recipe.views import RecipeListView, RecipeDetailView, RecipeCreateView, RecipeUpdateView
 
 
 urlpatterns = [
@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^$', RecipeListView.as_view(), name='recipe-list'),
     url(r'^add/$', RecipeCreateView.as_view(), name='recipe-add'),
     url(r'^(?P<slug>[\w-]+)/$', RecipeDetailView.as_view(), name='recipe-detail'),
+    url(r'^(?P<slug>[\w-]+)/update/$', RecipeUpdateView.as_view(), name='recipe-update'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
