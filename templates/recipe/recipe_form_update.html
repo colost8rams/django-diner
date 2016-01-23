@@ -1,15 +1,15 @@
-{% extends "base.html" %}{% load crispy_forms_tags %}
+{% extends "recipe/recipe_base.html" %}{% load crispy_forms_tags %}
 
 {% block title %}Add Yours{% endblock title %}
 
 {% block content %}
     <div class="page-header">
-        <h1><a href="{% url 'recipe-list' %}"><i class="fa fa-arrow-circle-left"></i></a> Add Yours</h1>
+        <h1><a href="{% url 'recipe-detail' object.slug %}"><i class="fa fa-arrow-circle-left"></i></a> {{ object }}</h1>
     </div>
     
     <div class="row">
         <div class="col-sm-8">
-            <form enctype="multipart/form-data" action="." method="post">
+            <form id="update-form" enctype="multipart/form-data" action="." method="post">
                 {% csrf_token %}
                 
                 <fieldset>
@@ -18,40 +18,59 @@
                 
                 <fieldset>
                     <legend>Recipe Ingredient</legend>
-                    {{ ingredient_form.management_form }}
                     {{ ingredient_form.non_form_errors }}
                     {% for form in ingredient_form %}
                         {{ form.id }}
+                        {% if form.instance.pk %}
+                        {{ form.name.errors }}
+                        {{ form.name.label_tag }}
+                        <div class="input-group">
+                            {{ form.name }}
+                            <span class="input-group-addon">{{ form.DELETE }} <strong class="text-danger">Delete</strong></span>
+                        </div><br/>
+                        {% else %}
                         <div class="inline {{ ingredient_form.prefix }}">
                             {{ form.name.errors }}
                             {{ form.name.label_tag }}
                             {{ form.name }}
                         </div>
+                        {% endif %}
                     {% endfor %}
+                    {{ ingredient_form.management_form }}
                 </fieldset>
                 
                 <br/>
                 
                 <fieldset>
                     <legend>Recipe instruction</legend>
-                    {{ instruction_form.management_form }}
                     {{ instruction_form.non_form_errors }}
                     {% for form in instruction_form %}
                         {{ form.id }}
+                        {% if form.instance.pk %}
+                        {{ form.description.errors }}
+                        {{ form.description.label_tag }}
+                        <div class="input-group">
+                            {{ form.description }}
+                            <span class="input-group-addon">{{ form.DELETE }} <strong class="text-danger">Delete</strong></span>
+                        </div><br/>
+                        {% else %}
                         <div class="inline {{ instruction_form.prefix }}">
                             {{ form.description.errors }}
                             {{ form.description.label_tag }}
                             {{ form.description }}
                         </div>
+                        {% endif %}
                     {% endfor %}
+                    {{ instruction_form.management_form }}
                 </fieldset>
                 
                 <br/>
                 
                 <div class="text-right">
-                    <button class="btn btn-default" type="submit">Update Recipe</button>
+                    <a href="{% url 'recipe-delete' object.slug %}" class="btn btn-danger">Delete Recipe</a>
+                    <button class="btn btn-primary" type="submit">Update Recipe</button>
                 </div>
-            
+        
             </form>
         </div>
         
@@ -66,11 +85,13 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.formset/1.2.2/jquery.formset.min.js"></script>
         <script type="text/javascript">
             $(function() {
+                
                 $(".inline.{{ ingredient_form.prefix }}").formset({
                     prefix: "{{ ingredient_form.prefix }}",
                     addText: 'add ingredient',
                     deleteText: 'remove'
                 })
+                
                 $(".inline.{{ instruction_form.prefix }}").formset({
                     prefix: "{{ instruction_form.prefix }}",
                     addText: 'add instruction',
