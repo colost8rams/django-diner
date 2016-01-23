@@ -1,0 +1,25 @@
+{% extends "recipe/recipe_base.html" %}{% load thumbnail %}
+
+{% block title %}{{ object }}{% endblock title %}
+
+{% block content %}
+
+    <div class="page-header">
+        <h1><a href="{% url 'recipe-detail' object.slug %}"><i class="fa fa-arrow-circle-left"></i></a> {{ object }}</h1>
+    </div>
+    
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="alert alert-danger text-center" role="alert">
+                <form action="" method="post">{% csrf_token %}
+                    <p>Are you sure you want to delete the recipe <strong>{{ object }}</strong>?</p>
+                    <a href="{% url 'recipe-update' object.slug %}" class="btn btn-success">Back to Safety</a>
+                    <button class="btn btn-danger" type="submit">Delete Recipe</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-4 text-center">
+            <img src="http://iab.wpengine.com/wp-content/uploads/2015/06/300x600.gif" width="300" height="600" />
+        </div>
+    </div>
+{% endblock content %}

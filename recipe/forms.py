@@ -71,8 +71,12 @@ class InstructionForm(forms.ModelForm):
         
 IngredientFormSet = inlineformset_factory(Recipe,Ingredient,
     form = IngredientForm,
-    fields = "__all__")
+    extra = 2,
+    fields = "__all__",
+    can_delete = True)
 
 InstructionFormSet = inlineformset_factory(Recipe,Instruction,
     form = InstructionForm,
-    fields = "__all__")
+    extra = 2,
+    fields = "__all__",
+    can_delete = True)

@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from .forms import RecipeForm, IngredientFormSet, InstructionFormSet
 from .models import Recipe
@@ -92,15 +93,14 @@ class RecipeCreateView(CreateView):
         Called if a form is invalid. Re-renders the context data with the
         data-filled forms and errors.
         """
-        return self.render_to_response(
-            self.get_context_data(form=form,
+        return self.render_to_response(self.get_context_data(form=form,
             ingredient_form=ingredient_form,
             instruction_form=instruction_form))
 
 
 class RecipeUpdateView(UpdateView):
     """
-    Django generic CreateView with overrides to handle the ingredient and
+    Django generic UpdateView with overrides to handle the ingredient and
     instruction inline formsets.
     """
     template_name = "recipe/recipe_form_update.html"
@@ -162,8 +162,14 @@ class RecipeUpdateView(UpdateView):
         Called if a form is invalid. Re-renders the context data with the
         data-filled forms and errors.
         """
-        return self.render_to_response(
-            self.get_context_data(form=form,
+        return self.render_to_response(self.get_context_data(form=form,
             ingredient_form=ingredient_form,
             instruction_form=instruction_form))
-    
+
+
+class RecipeDeleteView(DeleteView):
+    """
+    Django generic DeleteView to handle the deletion of recipes.
+    """
+    model = Recipe
+    success_url = reverse_lazy('recipe-list')

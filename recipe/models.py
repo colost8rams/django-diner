@@ -54,7 +54,7 @@ class Recipe(models.Model):
     date_modified = models.DateTimeField(auto_now=True)
     
     class Meta:
-        ordering = ["date_created"]
+        ordering = ["-date_created"]
     
     def __str__(self):
         return self.title

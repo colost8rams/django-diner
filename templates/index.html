@@ -23,7 +23,7 @@
             -moz-transform: translateX(-50%) translateY(-50%);
             -webkit-transform: translateX(-50%) translateY(-50%);
             transform: translateX(-50%) translateY(-50%);
-            background: url(/static/cookies.jpg) no-repeat;
+            background: url({{ STATIC_URL }}app/images/cookies.jpg) no-repeat;
             background-size: cover;
             opacity: 0.5;
         }
@@ -33,14 +33,14 @@
 {% block title %}Recipe List{% endblock title %}
 
 {% block content %}
-<video autoplay poster="{{ STATIC_URL }}/app/images/cookies.jpg" id="bgvid">
-    <source src="{{ STATIC_URL }}/app/videos/cookies.webm" type="video/webm">
-    <source src="{{ STATIC_URL }}/app/videos/cookies.mp4" type="video/mp4">
+<video autoplay poster="{{ STATIC_URL }}app/images/cookies.jpg" id="bgvid">
+    <source src="{{ STATIC_URL }}app/videos/cookies.webm" type="video/webm">
+    <source src="{{ STATIC_URL }}app/videos/cookies.mp4" type="video/mp4">
 </video>
 <div class="vertical-center">
     <div class="col-md-3 col-xs-1"></div>
     <div class="col-md-6 col-xs-10">
-        <h1 class="add-recipe text-center"><a href="{% url 'recipe-add' %}"><span>Recipes</span></a></h1>
+        <h1 class="add-recipe text-center"><a href="{% url 'recipe-create' %}"><span>Recipes</span></a></h1>
         <div class="list-group">
             {% for recipe in object_list %}
             <a href="{{ recipe.get_absolute_url }}" class="list-group-item">
